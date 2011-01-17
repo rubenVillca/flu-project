@@ -6,3 +6,5 @@ C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Servidor_So
 C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Servidor_Sockets\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Servidor_Sockets\obj\x86\Debug\Servidor_Sockets.exe
 C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Servidor_Sockets\obj\x86\Debug\Servidor_Sockets.pdb
+C:\Users\Drknezz\Documents\Visual Studio 2010\Projects\Flu\Servidor_Sockets\obj\x86\Debug\Servidor_Sockets.exe
+C:\Users\Drknezz\Documents\Visual Studio 2010\Projects\Flu\Servidor_Sockets\obj\x86\Debug\Servidor_Sockets.pdb

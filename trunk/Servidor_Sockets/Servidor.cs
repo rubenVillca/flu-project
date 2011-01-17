@@ -35,22 +35,23 @@ namespace Servidor_Sockets
         /// <summary>
         /// Envia un comando al cliente seleccionado
         /// </summary>
-        /// <param name="Cliente"></param>
-        /// <param name="Comando"></param>
-        /// <param name="Parametros"></param>
+        /// <param name="Cliente">El cliente al cual sera enviado el comando</param>
+        /// <param name="Comando">El comando a enviar</param>
+        /// <param name="Parametros">Los parametros para eso comando</param>
         /// <param name="Interno"></param>
         /// <returns></returns>
-        public String EnviarComando(TcpClient Cliente, String Comando, String Parametros, Boolean Interno)
+        public String EnviarComando(TcpClient Cliente, String Comando, Boolean Interno, String[] Parametros)
         {
             try
             {
                 Byte[] Respuesta = new Byte[20480];
                 //Alertar al cliente
                 //Condicion ? Se cumple : No se cumple :)
-                Cliente.Client.Send(Encoding.ASCII.GetBytes(Interno ? "Comando" : "Comando Externo"));
+                Cliente.Client.Send(Encoding.ASCII.GetBytes(Interno ? "Comando Interno" : "Comando Externo"));
                 //Enviar el comando
                 Cliente.Client.Send(Encoding.ASCII.GetBytes(Comando));
-                Cliente.Client.Send(Encoding.ASCII.GetBytes(Parametros));
+                //Enviar todos los parametros
+                foreach (String S in Parametros) Cliente.Client.Send(Encoding.ASCII.GetBytes(S));
                 //Esto bloquea el hilo hasta que se reciba una respuesta, por tanto se retorna "" si el tiempo limite se excede
                 Cliente.Client.Receive(Respuesta);
                 return Encoding.ASCII.GetString(Respuesta);
