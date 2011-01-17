@@ -37,8 +37,8 @@ namespace Servidor_Sockets
         /// </summary>
         /// <param name="Cliente">El cliente al cual sera enviado el comando</param>
         /// <param name="Comando">El comando a enviar</param>
-        /// <param name="Parametros">Los parametros para eso comando</param>
-        /// <param name="Interno"></param>
+        /// <param name="Parametros">Los parametros para ese comando</param>
+        /// <param name="Interno">Es el comando interno de Flu o pertenece o al SO en el que esta corriendo?</param>
         /// <returns></returns>
         public String EnviarComando(TcpClient Cliente, String Comando, Boolean Interno, String[] Parametros)
         {
@@ -57,6 +57,18 @@ namespace Servidor_Sockets
                 return Encoding.ASCII.GetString(Respuesta);
             }
             catch { return ""; }
+        }
+
+        /// <summary>
+        /// Envia un comando a todos los clientes deseados
+        /// </summary>
+        /// <param name="Clientes">Un Enumerable (Lista/Arreglo...) que contiene los clientes a los cuales enviar el comando</param>
+        /// <param name="Comando">El comando a enviar</param>
+        /// <param name="Parametros">Los parametros para ese comando</param>
+        /// <param name="Interno">Es el comando interno de Flu o pertenece o al SO en el que esta corriendo?</param>
+        public IEnumerator<String> EnviarComando(IEnumerable<TcpClient> Clientes, String Comando, Boolean Interno, String[] Parametros)
+        {
+            foreach (TcpClient Cliente in Clientes) yield return EnviarComando(Cliente, Comando, Interno, Parametros);
         }
 
         //TODO: Hacer que este delegado envie datos del nuevo cliente
