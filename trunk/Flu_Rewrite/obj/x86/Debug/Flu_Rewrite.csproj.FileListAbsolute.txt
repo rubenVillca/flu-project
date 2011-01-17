@@ -1,0 +1,16 @@
+C:\Users\Drknezz\documents\visual studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Drknezz\documents\visual studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\obj\x86\Debug\Flu_Rewrite.Properties.Resources.resources
+C:\Users\Drknezz\documents\visual studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\obj\x86\Debug\ResGen.read.1.tlog
+C:\Users\Drknezz\documents\visual studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\obj\x86\Debug\ResGen.write.1.tlog
+C:\Users\Drknezz\documents\visual studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\bin\Debug\Flu_Rewrite.exe
+C:\Users\Drknezz\documents\visual studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\bin\Debug\Flu_Rewrite.pdb
+C:\Users\Drknezz\documents\visual studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\obj\x86\Debug\Flu_Rewrite.exe
+C:\Users\Drknezz\documents\visual studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\obj\x86\Debug\Flu_Rewrite.pdb
+C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\obj\x86\Debug\Flu_Rewrite.exe
+C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\obj\x86\Debug\Flu_Rewrite.pdb
+C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\obj\x86\Debug\Flu_Rewrite.Properties.Resources.resources
+C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\obj\x86\Debug\ResGen.read.1.tlog
+C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\obj\x86\Debug\ResGen.write.1.tlog
+C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\bin\Debug\Flu_Rewrite.exe
+C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\bin\Debug\Flu_Rewrite.pdb
