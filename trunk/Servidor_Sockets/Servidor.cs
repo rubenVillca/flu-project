@@ -7,6 +7,7 @@ using System.Threading;
 
 namespace Servidor_Sockets
 {
+    //TODO: Pedir los datos del Keylogger
     //TODO: Implementar un metodo de control para hacer que la transmision pueda ser 
     //interrumpida por el cliente si asi lo desea, o si no necesita mas datos
     //Como obtener la IP: (IPEndPoint)s.RemoteEndPoint).Address.ToString()
@@ -125,7 +126,6 @@ namespace Servidor_Sockets
             foreach (TcpClient Cliente in Clientes) yield return EnviarArchivo(Cliente, Datos, Nombre);
         }
 
-        //TODO: El cliente podria generar esta info usando Reflection [Un poco complicado, pero eficiente]
         /// <summary>
         /// Obtiene detalles del cliente en cuestion, como la version y los comandos disponibles
         /// </summary>
