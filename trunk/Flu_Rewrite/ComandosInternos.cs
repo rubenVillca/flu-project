@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Diagnostics;
 using System.Net;
 using System.IO;
@@ -15,6 +13,8 @@ namespace Flu_Rewrite
         {
             Process[] Procesos = Process.GetProcesses();
             //Magia, Magia, Que se Haga LINQ :) [Funcion Lambda :P]
+            //http://msdn.microsoft.com/es-es/netframework/aa904594 - LINQ
+            //http://msdn.microsoft.com/es-es/library/bb397687.aspx - Funciones Lambda
             return Procesos.Select(x => x.ProcessName).ToArray();
         }
 
@@ -42,15 +42,41 @@ namespace Flu_Rewrite
             catch { return false; }
         }
 
-        public static Boolean RenombrarArchivo(String Inicio, String Destino)
+        public static Boolean MoverArchivo(String Inicio, String Destino)
         {
             try { File.Move(Inicio, Destino); return true; }
             catch { return false; }
         }
 
-        public static Boolean RenombrarCarpeta(String Inicio, String Destino)
+        public static Boolean MoverCarpeta(String Inicio, String Destino)
         {
             try { Directory.Move(Inicio, Destino); return true; }
+            catch { return false; }
+        }
+
+        public static Boolean BorrarArchivo(String Nombre)
+        {
+            try { File.Delete(Nombre); return true; }
+            catch { return false; }
+        }
+
+        public static Boolean BorrarCarpeta(String Nombre)
+        {
+            try { Directory.Delete(Nombre, true); return true; }
+            catch { return false; }
+        }
+
+        //El modificador ref hace que Resultado se pase como un puntero, no como una copia
+        public static Boolean ListarSubdirectorios(String Raiz, String Filtro, ref String[] Resultado)
+        {
+            try 
+            {
+                //Si la raiz es nula hacemos el listado en la carpeta actual, 
+                //de otro modo lo hacemos en la raiz especificada
+                DirectoryInfo DI = new DirectoryInfo(Raiz == "" ? Directory.GetCurrentDirectory() : Raiz );
+                Resultado = DI.GetDirectories().Select(x => x.Name).ToArray();
+                return true; 
+            }
             catch { return false; }
         }
     }
