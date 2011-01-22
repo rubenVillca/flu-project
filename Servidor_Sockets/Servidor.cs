@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net.Sockets;
 using System.Threading;
+using System.Net;
 
 namespace Servidor_Sockets
 {
@@ -16,11 +17,12 @@ namespace Servidor_Sockets
         private List<TcpClient> Clientes;
         private TcpListener Servidor;
         //Avisa al plugin de control que hay un nuveo cliente
-        public event EventHandler ClienteConectado;
+        public event EventHandler<ClienteConectado> ClienteConectado;
 
         public ServidorFlu()
         {
             //TODO: Usar un overload que no este depreciado
+            //Hint: http://msdn.microsoft.com/en-us/library/system.net.networkinformation.networkinterface.aspx
             Servidor = new TcpListener(21); Servidor.Start();
             Clientes = new List<TcpClient>();
             (new Thread(new ThreadStart(AceptarConexiones))).Start();
@@ -32,9 +34,11 @@ namespace Servidor_Sockets
             while (true)
             {
                 //Esta instruccion bloquea el hilo hasta que un nuevo cliente se conecte
-                Clientes.Add(Servidor.AcceptTcpClient());
+                TcpClient Cliente = Servidor.AcceptTcpClient();
+                //Añadimos ese cliente a la lista
+                Clientes.Add(Cliente);
                 //Avisamos al plugin que hay un nuevo cliente
-                OnClienteConectado();
+                OnClienteConectado(Cliente);
             }
         }
 
@@ -57,7 +61,14 @@ namespace Servidor_Sockets
                 //Enviar el comando
                 Cliente.Client.Send(Encoding.ASCII.GetBytes(Comando));
                 //Enviar todos los parametros
-                foreach (String S in Parametros) Cliente.Client.Send(Encoding.ASCII.GetBytes(S));
+                foreach (String S in Parametros)
+                { 
+                    Cliente.Client.Send(Encoding.ASCII.GetBytes(S)); Cliente.Client.Receive(Respuesta);
+                    //Si el cliente no necesita mas parametros interrumpimos el envio
+                    if (Encoding.ASCII.GetString(Respuesta).Equals("Interrumpir")) break;
+                }
+                //Alertamos al cliente de que se acabaron los parametros
+                Cliente.Client.Send(Encoding.ASCII.GetBytes("Fin Comando"));
                 //Esto bloquea el hilo hasta que se reciba una respuesta, por tanto se retorna "" si el tiempo limite se excede
                 Cliente.Client.Receive(Respuesta);
                 return Encoding.ASCII.GetString(Respuesta);
@@ -79,11 +90,12 @@ namespace Servidor_Sockets
             foreach (TcpClient Cliente in Clientes) yield return EnviarComando(Cliente, Comando, Interno, Parametros);
         }
 
-        //TODO: Hacer que este delegado envie datos del nuevo cliente
-        public virtual void OnClienteConectado()
+        public virtual void OnClienteConectado(TcpClient Cliente)
         {
-            EventHandler Delegado = ClienteConectado;
-            if (Delegado != null) Delegado(this, null);
+            //Thread Safety?
+            EventHandler<ClienteConectado> Delegado = ClienteConectado;
+            if (Delegado != null) 
+                Delegado(this, new ClienteConectado(((IPEndPoint)Cliente.Client.RemoteEndPoint).Address, ((IPEndPoint)Cliente.Client.RemoteEndPoint).Port));
         }
 
         /// <summary>
@@ -165,6 +177,18 @@ namespace Servidor_Sockets
                 return Retorno;
             }
             catch { return Retorno; }
+        }
+    }
+
+    class ClienteConectado : EventArgs
+    {
+        public readonly IPAddress Direccion;
+        public readonly int Puerto;
+
+        public ClienteConectado(IPAddress IP, int Port)
+        {
+            Direccion = IP;
+            Puerto = Port;
         }
     }
 }

