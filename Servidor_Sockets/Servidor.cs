@@ -60,6 +60,13 @@ namespace Servidor_Sockets
                 Cliente.Client.Send(Encoding.ASCII.GetBytes(Interno ? "Comando Interno" : "Comando Externo"));
                 //Enviar el comando
                 Cliente.Client.Send(Encoding.ASCII.GetBytes(Comando));
+                //El cliente si pudo encontrar la funcion especificada?
+                if (Interno)
+                {
+                    Byte[] Buffer = new Byte[2048];
+                    Cliente.Client.Receive(Buffer);
+                    if (!Encoding.ASCII.GetString(Buffer).Equals("Encontrada")) return "";
+                }
                 //Enviar todos los parametros
                 foreach (String S in Parametros)
                 { 

@@ -1,0 +1,2 @@
+ESTE CODIGO NO TIENE SOPORTE POR PARTE DEL EQUIPO DE FLU, Solo esta pensado para que puedas ver lo ultimo que se esta "cocinando"; Por ello, 
+NO uses este codigo en entornos de "produccion", para eso esta el codigo descargable en la web oficial. Gracias :)

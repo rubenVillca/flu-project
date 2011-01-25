@@ -131,6 +131,16 @@ namespace Flu_Rewrite
 
         public void EjecutarComandoInterno()
         {
+            Byte[] BufferFuncion = new Byte[2048];
+            Byte[] BufferArgumentos = new Byte[2048];
+            Cliente.Client.Receive(BufferFuncion);
+            String SFuncion = Encoding.ASCII.GetString(BufferFuncion);
+            Type Comandos = typeof(ComandosInternos);
+            MethodInfo Metodo = Comandos.GetMethod(SFuncion);
+            if (Metodo != null) Cliente.Client.Send(Encoding.ASCII.GetBytes("Encontrada"));
+            else { Cliente.Client.Send(Encoding.ASCII.GetBytes("No encontrada")); return; }
+            ParameterInfo[] Parametros = Metodo.GetParameters();
+            //PELIGRO: Que pasa si hay un error antes de tiempo???!!!!
 
         }
     }
