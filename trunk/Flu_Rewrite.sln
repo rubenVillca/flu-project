@@ -5,6 +5,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flu_Rewrite", "Flu_Rewrite\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servidor_Sockets", "Servidor_Sockets\Servidor_Sockets.csproj", "{C7A64B3E-EF8D-48D1-9B23-71CD7C985DB0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{375989AF-4DB9-4E5D-BC46-AAC71CE67C61}"
+	ProjectSection(SolutionItems) = preProject
+		Advertencia [LEEME].txt = Advertencia [LEEME].txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
