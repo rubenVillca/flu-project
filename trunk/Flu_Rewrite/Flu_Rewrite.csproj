@@ -46,6 +46,7 @@
     <Compile Include="ClienteSockets.cs" />
     <Compile Include="ComandosInternos.cs" />
     <Compile Include="EjecucionComandos.cs" />
+    <Compile Include="Extensiones.cs" />
     <Compile Include="Keylogger.cs" />
     <Compile Include="LectorXML.cs" />
     <Compile Include="Program.cs" />

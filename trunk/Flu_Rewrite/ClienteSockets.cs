@@ -6,6 +6,7 @@ using System.Text;
 using System.Security.Principal;
 using System.Diagnostics;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace Flu_Rewrite
 {
@@ -131,17 +132,37 @@ namespace Flu_Rewrite
 
         public void EjecutarComandoInterno()
         {
-            Byte[] BufferFuncion = new Byte[2048];
-            Byte[] BufferArgumentos = new Byte[2048];
-            Cliente.Client.Receive(BufferFuncion);
-            String SFuncion = Encoding.ASCII.GetString(BufferFuncion);
-            Type Comandos = typeof(ComandosInternos);
-            MethodInfo Metodo = Comandos.GetMethod(SFuncion);
-            if (Metodo != null) Cliente.Client.Send(Encoding.ASCII.GetBytes("Encontrada"));
-            else { Cliente.Client.Send(Encoding.ASCII.GetBytes("No encontrada")); return; }
-            ParameterInfo[] Parametros = Metodo.GetParameters();
-            //PELIGRO: Que pasa si hay un error antes de tiempo???!!!!
-
+            try
+            {
+                //Buffers
+                Byte[] BufferFuncion = new Byte[2048];
+                Byte[] BufferArgumentos = new Byte[2048];
+                //Recibir el nombre del metodo
+                Cliente.Client.Receive(BufferFuncion);
+                //Decodificarlo
+                String SFuncion = Encoding.ASCII.GetString(BufferFuncion);
+                //Buscar el metodo
+                Type Comandos = typeof(ComandosInternos);
+                MethodInfo Metodo = Comandos.GetMethod(SFuncion);
+                //Alertar al servidor si el metodo fue encontrado
+                if (Metodo != null) Cliente.Client.Send(Encoding.ASCII.GetBytes("Encontrada"));
+                else { Cliente.Client.Send(Encoding.ASCII.GetBytes("No encontrada")); return; }
+                //Una lsta de los parametros que envia el servidor
+                List<String> Parametros = new List<String>();
+                Cliente.Client.Receive(BufferArgumentos);
+                String Buffer = Encoding.ASCII.GetString(BufferArgumentos);
+                //Mientras hayan parametros, añadirlos...
+                while (Buffer != "Fin Comando")
+                {
+                    Parametros.Add(Buffer);
+                    BufferArgumentos.Limpiar();
+                    Cliente.Client.Receive(BufferArgumentos);
+                    Buffer = Encoding.ASCII.GetString(BufferArgumentos);
+                }
+                Object Retorno = Metodo.Invoke(null, new object[1] { Parametros.ToArray() as object[] });
+                Cliente.Client.Send(Encoding.ASCII.GetBytes(Retorno.ToString()));
+            }
+            catch { return; }
         }
     }
 }
