@@ -8,3 +8,11 @@ C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Servidor_So
 C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Servidor_Sockets\obj\x86\Debug\Servidor_Sockets.pdb
 C:\Users\Drknezz\Documents\Visual Studio 2010\Projects\Flu\Servidor_Sockets\obj\x86\Debug\Servidor_Sockets.exe
 C:\Users\Drknezz\Documents\Visual Studio 2010\Projects\Flu\Servidor_Sockets\obj\x86\Debug\Servidor_Sockets.pdb
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Servidor_Sockets\obj\x86\Debug\Servidor_Sockets.exe
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Servidor_Sockets\obj\x86\Debug\Servidor_Sockets.pdb
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Servidor_Sockets\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Servidor_Sockets\obj\x86\Debug\Servidor_Sockets.Properties.Resources.resources
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Servidor_Sockets\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Servidor_Sockets\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Servidor_Sockets\bin\Debug\Servidor_Sockets.exe
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Servidor_Sockets\bin\Debug\Servidor_Sockets.pdb

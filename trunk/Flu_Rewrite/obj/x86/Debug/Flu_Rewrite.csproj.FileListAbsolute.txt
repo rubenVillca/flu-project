@@ -14,3 +14,11 @@ C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Flu_Rewrite
 C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\obj\x86\Debug\ResGen.write.1.tlog
 C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\bin\Debug\Flu_Rewrite.exe
 C:\Users\Drknezz\Desktop\USB\Visual Studio 2010\Projects\Flu_Rewrite\Flu_Rewrite\bin\Debug\Flu_Rewrite.pdb
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Flu_Rewrite\bin\Debug\Flu_Rewrite.exe
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Flu_Rewrite\bin\Debug\Flu_Rewrite.pdb
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Flu_Rewrite\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Flu_Rewrite\obj\x86\Debug\Flu_Rewrite.Properties.Resources.resources
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Flu_Rewrite\obj\x86\Debug\ResGen.read.1.tlog
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Flu_Rewrite\obj\x86\Debug\ResGen.write.1.tlog
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Flu_Rewrite\obj\x86\Debug\Flu_Rewrite.exe
+C:\Users\Drknzz\Documents\Visual Studio 2010\Projects\Flu\Flu_Rewrite\obj\x86\Debug\Flu_Rewrite.pdb
