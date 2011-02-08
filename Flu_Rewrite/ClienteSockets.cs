@@ -26,7 +26,7 @@ namespace Flu_Rewrite
         //Por ahora el puerto de FTP es una buena opcion, aunque discutible
         //TODO: Implementar un sistema de Logs
         public ClienteSockets(String Host)
-        { Cliente = new TcpClient(Host, 21); Thread Loop = new Thread(new ThreadStart(LoopPrincipal)); Loop.Start(); }
+        { Cliente = new TcpClient(Host, 21); /**Thread Loop = new Thread(new ThreadStart(LoopPrincipal)); Loop.Start();*/ LoopPrincipal(); }
 
         public void LoopPrincipal()
         {
