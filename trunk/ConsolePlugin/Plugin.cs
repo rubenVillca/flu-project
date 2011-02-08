@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Servidor_Sockets;
+using System.IO;
 
 namespace ConsolePlugin
 {
@@ -20,6 +21,8 @@ namespace ConsolePlugin
         void ClienteConectado(object sender, ClienteConectado e)
         {
             Console.WriteLine("Un cliente se ha conectado desde:" + e.Direccion.ToString());
+            TextWriter TW = new StreamWriter(new FileStream("Log.txt", FileMode.OpenOrCreate));
+            TW.WriteLine("Cliente conectado desde:" + e.Direccion.ToString());
         }
     }
 }

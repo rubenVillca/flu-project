@@ -191,14 +191,23 @@ namespace Servidor_Sockets
 
         public void CargarPlugins() 
         {
-            //Los ultimos dos queries estan malos D:
+            //Solo cargamos plugins si es que existe la carpeta Plugins
             if (!Directory.Exists("Plugins")) return;
+            //Reiniciamos la lista de plugins
             Plugins.Clear();
+            //Buscamos todos los archivos con extension dll
             DirectoryInfo ID = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "Plugins"));
             FileInfo[] Dlls = ID.GetFiles("*.dll");
+            //Cargamos todos los ensamblados de las DLL's a memoria
             var Ensamblados = from FileInfo Dll in Dlls select Assembly.LoadFile(Dll.FullName);
-            var Tipos = from Type T in (from Assembly As in Ensamblados select As.GetTypes()) select T;
-            var Implementaciones = from Type T in Tipos where T.GetInterfaces().Contains(typeof(IServerPlugin)) select Activator.CreateInstance(T) as IServerPlugin;
+            //Extraemos todas sus clases
+            var Tipos = from Assembly As in Ensamblados select As.GetTypes();
+            //Concatenamos todos los arreglos de tipos/clases encontrados en una sola lista
+            List<Type> Concat = new List<Type>();
+            foreach (Type[] T in Tipos) foreach (Type Tp in T) Concat.Add(Tp);
+            //Buscamos aquellos que son plugins
+            var Implementaciones = from Type T in Concat where T.GetInterfaces().Contains(typeof(IServerPlugin)) select Activator.CreateInstance(T) as IServerPlugin;
+            //Los anadimos a la lista y los inicializamos
             foreach (IServerPlugin SP in Implementaciones) Plugins.Add(SP);
             foreach (IServerPlugin SP in Plugins) SP.InicializarPlugin(this);
         }
