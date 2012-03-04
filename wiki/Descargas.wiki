@@ -11,9 +11,6 @@ La aplicación se divide en dos partes, cliente y servidor. El servidor se encue
 Desde esta página podrás descargar tanto el código fuente de la herramienta, como los ejecutables compilados y manuales de configuración y de usuario.
 
 
-= Details =
+= Descargas =
 
-aAdd your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Flu b0.4.1
